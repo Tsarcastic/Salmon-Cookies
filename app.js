@@ -18,6 +18,7 @@ function Branch(name, min, max, avg) {
   this.maxph = max;
   this.avgph = avg;
   this.cookiesSoldEachHour = [];
+  this.totalSold = 0;
   branches.push(this);
 };
 
@@ -26,6 +27,7 @@ Branch.prototype.sellCookies = function() {
       var bot = Math.ceil(this.minph);
       var top = Math.floor(this.maxph);
       var people = Math.floor(Math.random() * (top - bot + 1)) + bot;
+      this.totalSold = this.totalSold + Math.floor(this.avgph * people);
       this.cookiesSoldEachHour.push(Math.floor(this.avgph * people));
   }
 }
@@ -40,6 +42,9 @@ Branch.prototype.render = function() {
     tdEl.textContent = this.cookiesSoldEachHour[i];
     trEl.appendChild(tdEl);
   };
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.totalSold;
+  trEl.appendChild(tdEl);
   cookies.appendChild(trEl)
 }
 
