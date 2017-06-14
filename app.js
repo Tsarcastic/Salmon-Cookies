@@ -13,7 +13,7 @@ var header = new function() {
     trEl.appendChild(thEl);
   };
   thEl = document.createElement('th');
-  thEl.textContent = 'Total Sold';
+  thEl.textContent = 'Today\'s Total';
   trEl.appendChild(thEl);
   cookies.appendChild(trEl)
 
