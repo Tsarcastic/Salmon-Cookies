@@ -2,6 +2,23 @@ var hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:
 '16:00', '17:00', '18:00', '19:00', '20:00',];
 var branches = [];
 
+var header = new function() {
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = "Location";
+  trEl.append(thEl);
+  for (var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hours[i];;
+    trEl.appendChild(thEl);
+  };
+  thEl = document.createElement('th');
+  thEl.textContent = 'Total Sold';
+  trEl.appendChild(thEl);
+  cookies.appendChild(trEl)
+
+}
+
 function sellCookies() {
   for (var i = 0; i < hours.length; i++) {
     function cookiesSold(place) {
