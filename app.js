@@ -1,8 +1,9 @@
+'use strict'
 var hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00',
 '16:00', '17:00', '18:00', '19:00'];
 var branches = [];
 
-var header = new function() {
+var header = new function() { //Creates header
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   thEl.textContent = "Location";
@@ -66,6 +67,36 @@ Branch.prototype.render = function() {
   cookies.appendChild(trEl)
 }
 
+var employees = new function() { // Create the employee table
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+}
+
+Branch.prototype.empCalc = function() { // Create the employee array
+  for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
+    this.empWork = Math.ceil(this.cookiesSoldEachHour[i] / 20);
+    if (this.empWork < 2) {
+      this.empWork = 2;
+    };
+    this.empNeed.push(this.empWork);
+  };
+}
+
+Branch.prototype.payroll = function() { //Appending the employee array
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < this.empNeed.length; i++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.empNeed[i];
+    trEl.appendChild(tdEl);
+  };
+  cookies.appendChild(trEl)
+}
+
 var pike = new Branch('1st and Pike', 23, 65, 6.3);
 var seaTac = new Branch('Seatac Airport', 3, 24, 1.2);
 var seaCen = new Branch('Seattle Center', 11, 38, 3.7);
@@ -83,21 +114,6 @@ capHill.render();
 alki.sellCookies();
 alki.render();
 
-var employees = new function() {
-  var trEl = document.createElement('tr');
-  var tdEl = document.createElement('td');
-  tdEl.textContent = this.name;
-  trEl.appendChild(tdEl);
 
-}
-
-Branch.prototype.empCalc = function() {
-for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
-  this.empWork = Math.floor(this.cookiesSoldEachHour[i] / 20)
-  if (this.empWork < 2) {
-    this.empWork = 2;
-  };
-  this.empNeed.push(this.empWork);
-  console.log(this.empWork);
-};
-}
+pike.empCalc()
+pike.payroll()
