@@ -28,3 +28,14 @@ p {
   color: #80DED9;
   font-size: 25px;
 }
+
+#cookies {
+  font-size: 25px;
+  border: 2px solid black;
+}
+
+td, th, tr {
+  border: 1px solid black;
+  position: relative;
+  text-align: center;
+}

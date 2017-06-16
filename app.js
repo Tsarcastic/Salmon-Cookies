@@ -91,12 +91,10 @@ function renderFooter() {
   var totalOfTotals = 0;
   var hourlyTotal = 0;
   for (var i = 0; i < hours.length; i++) {
-    console.log(i)
     hourlyTotal = 0;
     thEl = document.createElement('th');
     for (var j = 0; j < branches.length; j++){
       hourlyTotal += branches[j].cookiesSoldEachHour[i];
-      console.log("The hourly total is " + hourlyTotal + " on " + " iteration")
       totalOfTotals += branches[j].cookiesSoldEachHour[i];
     };
     thEl.textContent = hourlyTotal;
@@ -137,3 +135,65 @@ function handleNewBranch(event) {
 };
 
 newLoc.addEventListener('submit', handleNewBranch);
+
+var employees = new function() { // Create the employee table
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+}
+
+
+Branch.prototype.empCalc = function() { // Create the employee array
+  for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
+    this.empWork = Math.ceil(this.cookiesSoldEachHour[i] / 20);
+    if (this.empWork < 2) {
+      this.empWork = 2;
+    };
+    this.empNeed.push(this.empWork);
+  };
+}
+
+Branch.prototype.payroll = function() { //Appending the employee array
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < this.empNeed.length; i++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.empNeed[i];
+    trEl.appendChild(tdEl);
+  };
+  peoples.appendChild(trEl)
+}
+
+function prHeader() { //Creates employee header
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = "Location";
+  trEl.append(thEl);
+  for (var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hours[i];;
+    trEl.appendChild(thEl);
+  };
+  thEl = document.createElement('th');
+  thEl.textContent = 'Total Work Hours';
+  trEl.appendChild(thEl);
+  peoples.appendChild(trEl)
+}
+
+// pike.empCalc();
+// prHeader();
+// pike.payroll();
+
+for (var i = 0; i < branches.length; i++) {//Iterate through calculations
+  branches[i].empCalc();
+  console.log(branches[i] + 'needs' + 'employees')
+};
+
+prHeader();//Creates Header - Working great!
+
+for (var i = 0; i < branches.length; i++) { //Iterate through appending
+  branches[i].payroll();
+}
