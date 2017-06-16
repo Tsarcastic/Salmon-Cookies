@@ -1,0 +1,30 @@
+#indexBod {
+  background-color: #6D9DC5;
+  color: #FFFFFA;
+}
+
+p {
+  background-color: #4C212A;
+  margin: 40px 370px 60px 370px;
+  color: #FFFFFA;
+  font-size: 50px;
+  padding: 25px;
+  border-radius: 10%
+}
+
+.center-fish {
+  margin: 0 auto;
+  display: block;
+  padding-top: 100px;
+  border-radius: 25%
+}
+
+#fish {
+  border-radius: 25%;
+}
+
+.resources {
+  margin: 50px 1500px 10px 10px;
+  color: #80DED9;
+  font-size: 25px;
+}
