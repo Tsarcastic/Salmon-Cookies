@@ -4,16 +4,24 @@ var hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:
 '16:00', '17:00', '18:00', '19:00'];
 var branches = [];
 
+function machenElement(type, content, parent) {//Still needs work
+  var newEl = document.createElement(type);
+  newEl.textContent = content;
+  parent.appendChild(type);
+  }
+
 function renderHeader() { //Creates header
   var trEl = document.createElement('tr');
+  // machenElement('th', 'location', trEl);
   var thEl = document.createElement('th');
-  thEl.textContent = "Location";
+  thEl.textContent = 'Location';
   trEl.append(thEl);
   for (var i = 0; i < hours.length; i++) {
     thEl = document.createElement('th');
     thEl.textContent = hours[i];;
     trEl.appendChild(thEl);
   };
+  // machenElement('th', 'Today\'s Total', trEl);
   thEl = document.createElement('th');
   thEl.textContent = 'Today\'s Total';
   trEl.appendChild(thEl);
@@ -53,16 +61,19 @@ Branch.prototype.sellCookies = function() {
 };
 
 Branch.prototype.render = function() {
-  this.sellCookies();
+  this.sellCookies(); //Need to get rid of this - Recalculating totals every time it renders
   var trEl = document.createElement('tr');
+
   var tdEl = document.createElement('td');
   tdEl.textContent = this.name;
   trEl.appendChild(tdEl);
+
   for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
     tdEl = document.createElement('td');
     tdEl.textContent = this.cookiesSoldEachHour[i];
     trEl.appendChild(tdEl);
   };
+
   tdEl = document.createElement('td');
   tdEl.textContent = this.totalSold;
   trEl.appendChild(tdEl);
@@ -113,18 +124,21 @@ function fullRender() {
 }
 
 fullRender();
-//End of footer
 
 var newLoc = document.getElementById('newBranch');
 var myTable = document.getElementById('cookies');
 
-function handleNewBranch(event) {
+function handleNewBranch(event) {//Creates new branch
   event.preventDefault();
   var newName = event.target.name.value;
   var newMin = parseInt(event.target.min.value);
   var newMax = parseInt(event.target.max.value);
   var newAvg = parseInt(event.target.avg.value);
   var newBranch = new Branch(newName, newMin, newMax, newAvg);
+  if(!newName || !newMin || !newMax || !newAvg) {
+    return alert('One or more of your fields is missing a value.')
+  }
+  else {
   newBranch.render();
   event.target.name.value = null;
   event.target.min.value = null;
@@ -132,6 +146,7 @@ function handleNewBranch(event) {
   event.target.avg.value = null;
   myTable.innerHTML = " ";
   fullRender();
+};
 };
 
 newLoc.addEventListener('submit', handleNewBranch);
