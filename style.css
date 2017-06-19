@@ -97,13 +97,21 @@ a {
   margin-bottom: 10px;
 }
 
-#cookies {
-  font-size: 25px;
+#cookies, #peoples{
+  font-size: 20px;
   border: 2px solid black;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 td, th, tr {
   border: 1px solid black;
   position: relative;
   text-align: center;
+  width: 100px;
+}
+
+th {
+  background-color: black;
+  color: white;
 }

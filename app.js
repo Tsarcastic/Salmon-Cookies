@@ -55,7 +55,7 @@ function renderHeader() { //Creates header
   };
   // machenElement('th', 'Today\'s Total', trEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Today\'s Total';
+  thEl.textContent = 'Total Cookies';
   trEl.appendChild(thEl);
   cookies.appendChild(trEl)
 }
@@ -106,11 +106,13 @@ function renderFooter() {
     thEl.textContent = hourlyTotal;
     trEl.appendChild(thEl);
   };
-  thEl = document.createElement('thEl');
+  thEl = document.createElement('th');
   thEl.textContent = totalOfTotals;
   trEl.appendChild(thEl);
   cookies.appendChild(trEl);
 };
+
+
 
 function fullRender() {
   renderHeader();
