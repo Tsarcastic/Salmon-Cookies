@@ -61,7 +61,6 @@ function renderHeader() { //Creates header
 }
 
 Branch.prototype.render = function() {
-  // this.sellCookies(); //Need to get rid of this - Recalculating totals every time it renders
   var trEl = document.createElement('tr');
 
   var tdEl = document.createElement('td');
@@ -87,26 +86,6 @@ function renderBody() {
     branches[i].render();
   };
 };
-
-// function sellCookies() {
-//   for (var i = 0; i < hours.length; i++) {
-//     function cookiesSold(place) {
-//       let bot = Math.ceil(this.minph);
-//       let top = Math.floor(this.maxph);
-//       let people = Math.floor(Math.random() * (top - bot + 1)) + bot;
-//     };
-//   };
-// };
-
-
-
-
-
-
-
-
-
-
 
 function renderFooter() {
   var trEl = document.createElement('tr');
@@ -155,73 +134,76 @@ function handleNewBranch(event) {//Creates new branch
     return alert('One or more of your fields is missing a value.')
   }
   else {
-  newBranch.sellCookies();
-  newBranch.render();
-  event.target.name.value = null;
-  event.target.min.value = null;
-  event.target.max.value = null;
-  event.target.avg.value = null;
-  myTable.innerHTML = " ";
-  fullRender();
-};
+    newBranch.sellCookies();
+    newBranch.render();
+    event.target.name.value = null;
+    event.target.min.value = null;
+    event.target.max.value = null;
+    event.target.avg.value = null;
+    myTable.innerHTML = " ";
+    fullRender();
+  };
 };
 
 newLoc.addEventListener('submit', handleNewBranch);
 
-// var employees = new function() { // Create the employee table
-//   var trEl = document.createElement('tr');
-//   var tdEl = document.createElement('td');
-//   tdEl.textContent = this.name;
-//   trEl.appendChild(tdEl);
-// }
-//
-//
-// Branch.prototype.empCalc = function() { // Create the employee array
-//   for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
-//     this.empWork = Math.ceil(this.cookiesSoldEachHour[i] / 20);
-//     if (this.empWork < 2) {
-//       this.empWork = 2;
-//     };
-//     this.empNeed.push(this.empWork);
-//   };
-// }
-//
-// Branch.prototype.payroll = function() { //Appending the employee array
-//   var trEl = document.createElement('tr');
-//   var tdEl = document.createElement('td');
-//   tdEl.textContent = this.name;
-//   trEl.appendChild(tdEl);
-//   for (var i = 0; i < this.empNeed.length; i++) {
-//     tdEl = document.createElement('td');
-//     tdEl.textContent = this.empNeed[i];
-//     trEl.appendChild(tdEl);
-//   };
-//   peoples.appendChild(trEl)
-// }
-//
-// function prHeader() { //Creates employee header
-//   var trEl = document.createElement('tr');
-//   var thEl = document.createElement('th');
-//   thEl.textContent = "Location";
-//   trEl.append(thEl);
-//   for (var i = 0; i < hours.length; i++) {
-//     thEl = document.createElement('th');
-//     thEl.textContent = hours[i];;
-//     trEl.appendChild(thEl);
-//   };
-//   thEl = document.createElement('th');
-//   thEl.textContent = 'Total Work Hours';
-//   trEl.appendChild(thEl);
-//   peoples.appendChild(trEl)
-// }
-//
-// for (var i = 0; i < branches.length; i++) {//Iterate through calculations
-//   branches[i].empCalc();
-//   console.log(branches[i] + 'needs' + 'employees')
-// };
-//
-// prHeader();//Creates Header - Working great!
-//
-// for (var i = 0; i < branches.length; i++) { //Iterate through appending
-//   branches[i].payroll();
-// }
+var employees = new function() { // Create the employee table
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+}
+
+
+Branch.prototype.empCalc = function() { // Create the employee array
+  for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {
+    this.empWork = Math.ceil(this.cookiesSoldEachHour[i] / 20);
+    if (this.empWork < 2) {
+      this.empWork = 2;
+    };
+    this.empNeed.push(this.empWork);
+  };
+}
+
+Branch.prototype.payroll = function() { //Appending the employee array
+  var trEl = document.createElement('tr');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
+  for (var i = 0; i < this.empNeed.length; i++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.empNeed[i];
+    trEl.appendChild(tdEl);
+  };
+  peoples.appendChild(trEl)
+}
+
+function prHeader() { //Creates employee header
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = "Location";
+  trEl.append(thEl);
+  for (var i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hours[i];;
+    trEl.appendChild(thEl);
+  };
+  thEl = document.createElement('th');
+  thEl.textContent = 'Total Work Hours';
+  trEl.appendChild(thEl);
+  peoples.appendChild(trEl)
+}
+
+function prTable() { //calculates employees & creates the table
+  for (var i = 0; i < branches.length; i++) {//Iterate through calculations
+    branches[i].empCalc();
+  };
+
+  prHeader();//Creates Header - Working great!
+
+  for (var i = 0; i < branches.length; i++) { //Iterate through appending
+    branches[i].payroll();
+  }
+}
+
+prTable();
