@@ -38,8 +38,9 @@ Branch.prototype.sellCookies = function() {
   }
 };
 
-
-
+for (var i = 0; i < branches.length; i++) { //Calculates sold cookies for main locations
+  branches[i].sellCookies();
+}
 
 function renderHeader() { //Creates header
   var trEl = document.createElement('tr');
@@ -154,7 +155,7 @@ function handleNewBranch(event) {//Creates new branch
     return alert('One or more of your fields is missing a value.')
   }
   else {
-  newBranch.sellCookies;
+  newBranch.sellCookies();
   newBranch.render();
   event.target.name.value = null;
   event.target.min.value = null;
