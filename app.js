@@ -134,15 +134,15 @@ function handleNewBranch(event) {//Creates new branch
     return alert('One or more of your fields is missing a value.')
   }
   else {
-    newBranch.sellCookies();
-    newBranch.render();
-    event.target.name.value = null;
-    event.target.min.value = null;
-    event.target.max.value = null;
-    event.target.avg.value = null;
-    myTable.innerHTML = " ";
-    fullRender();
-  };
+  newBranch.sellCookies();
+  newBranch.render();
+  event.target.name.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.avg.value = null;
+  myTable.innerHTML = " ";
+  fullRender();
+};
 };
 
 newLoc.addEventListener('submit', handleNewBranch);
@@ -194,16 +194,13 @@ function prHeader() { //Creates employee header
   peoples.appendChild(trEl)
 }
 
-function prTable() { //calculates employees & creates the table
-  for (var i = 0; i < branches.length; i++) {//Iterate through calculations
-    branches[i].empCalc();
-  };
+for (var i = 0; i < branches.length; i++) {//Iterate through calculations
+  branches[i].empCalc();
+  console.log(branches[i] + 'needs' + 'employees')
+};
 
-  prHeader();//Creates Header - Working great!
+prHeader();//Creates Header - Working great!
 
-  for (var i = 0; i < branches.length; i++) { //Iterate through appending
-    branches[i].payroll();
-  }
+for (var i = 0; i < branches.length; i++) { //Iterate through appending
+  branches[i].payroll();
 }
-
-prTable();
