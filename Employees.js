@@ -4,7 +4,7 @@ var employees = new function() { // Create the employee table
   tdEl.textContent = this.name;
   trEl.appendChild(tdEl);
 }
-
+// 
 EmpCalc is solid
 Branch.prototype.empCalc = function() { // Create the employee array
   for (var i = 0; i < this.cookiesSoldEachHour.length; i++) {

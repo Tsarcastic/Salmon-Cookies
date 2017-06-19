@@ -1,32 +1,100 @@
-#indexBod {
-  background-color: #6D9DC5;
-  color: #FFFFFA;
+body {max-width:960px;
+margin: 0 auto;
+  background-color: #87BDCE
+}
+
+nav {
+  background-color: #805E73;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 90px;
+  }
+
+li { display: inline;
+     font-size: 25px;
+     float: left;
+}
+
+#second_sub {
+  margin: 24px 26px 0px 26px;
+}
+
+#third_sub {
+  position: relative;
+  top: 148px;
+}
+
+.sub_banners {
+  padding: 0px;
+  float: left;
+  width: 960;
+  margin-top: 2%;
+  margin-bottom: 2%
+}
+
+.featured_section {
+  float: left;
+}
+
+
+
+button {
+  display: fixed;
+  padding: 10px 50px 10px 50px;
+  border-radius: 5%;
+
+ }
+
+button:hover {
+  background-color: red;
+}
+
+footer {
+  display: block;
+  margin-top: 630px;
+  margin-bottom: 100px;
+  background-color:gray;
+  height: 200px;
+  width: 960px;
+}
+
+.right {
+  float: right;
+  width: 45%;
+  height: 200px;
+
 }
 
 p {
-  background-color: #4C212A;
-  margin: 40px 370px 60px 370px;
-  color: #FFFFFA;
-  font-size: 50px;
-  padding: 25px;
-  border-radius: 10%
+  background-color: #805E73;
+  margin-bottom: 20px;
+  overflow: auto;
+  height: 183px;
+  font-size: 22px;
+  text-align: center;
+  padding-top: 15px;
 }
 
-.center-fish {
-  margin: 0 auto;
-  display: block;
-  padding-top: 100px;
-  border-radius: 25%
+h2 {
+  font-size: 1.5em;
 }
 
-#fish {
-  border-radius: 25%;
+a {
+  padding: 30px;
 }
 
-.resources {
-  margin: 50px 1500px 10px 10px;
-  color: #80DED9;
-  font-size: 25px;
+.words {
+  position: absolute;
+  background-color: #805E73;
+  font-size: 18px;
+  max-width: 276px;
+  height: 110px;
+  margin-top: 20px;
+}
+
+#top {
+  margin-bottom: 10px;
 }
 
 #cookies {
