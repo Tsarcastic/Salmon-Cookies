@@ -4,11 +4,43 @@ var hours = ['06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:
 '16:00', '17:00', '18:00', '19:00'];
 var branches = [];
 
-function machenElement(type, content, parent) {//Still needs work
-  var newEl = document.createElement(type);
-  newEl.textContent = content;
-  parent.appendChild(type);
+// function machenElement(type, content, parent) {//Still needs work
+//   var newEl = document.createElement(type);
+//   newEl.textContent = content;
+//   parent.appendChild(type);
+//   }
+
+function Branch(name, min, max, avg) {
+  this.name = name;
+  this.minph = min;
+  this.maxph = max;
+  this.avgph = avg;
+  this.cookiesSoldEachHour = [];
+  this.totalSold = 0;
+  this.empWork = 0
+  this.empNeed = [];
+  branches.push(this);
+};
+
+var pike = new Branch('1st and Pike', 23, 65, 6.3);
+var seaTac = new Branch('Seatac Airport', 3, 24, 1.2);
+var seaCen = new Branch('Seattle Center', 11, 38, 3.7);
+var capHill = new Branch('Capitol Hill', 20, 38, 2.3);
+var alki = new Branch('Alki', 2, 16, 4.6);
+
+Branch.prototype.sellCookies = function() {
+  for (var i = 0; i < hours.length; i++) {
+    var bot = Math.ceil(this.minph);
+    var top = Math.floor(this.maxph);
+    var people = Math.floor(Math.random() * (top - bot + 1)) + bot;
+    this.totalSold = this.totalSold + Math.floor(this.avgph * people);
+    this.cookiesSoldEachHour.push(Math.floor(this.avgph * people));
   }
+};
+
+for (var i = 0; i < branches.length; i++) { //Calculates sold cookies for main locations
+  branches[i].sellCookies();
+}
 
 function renderHeader() { //Creates header
   var trEl = document.createElement('tr');
@@ -28,40 +60,7 @@ function renderHeader() { //Creates header
   cookies.appendChild(trEl)
 }
 
-function sellCookies() {
-  for (var i = 0; i < hours.length; i++) {
-    function cookiesSold(place) {
-      let bot = Math.ceil(this.minph);
-      let top = Math.floor(this.maxph);
-      let people = Math.floor(Math.random() * (top - bot + 1)) + bot;
-    };
-  };
-};
-
-function Branch(name, min, max, avg) {
-  this.name = name;
-  this.minph = min;
-  this.maxph = max;
-  this.avgph = avg;
-  this.cookiesSoldEachHour = [];
-  this.totalSold = 0;
-  this.empWork = 0
-  this.empNeed = [];
-  branches.push(this);
-};
-
-Branch.prototype.sellCookies = function() {
-  for (var i = 0; i < hours.length; i++) {
-    var bot = Math.ceil(this.minph);
-    var top = Math.floor(this.maxph);
-    var people = Math.floor(Math.random() * (top - bot + 1)) + bot;
-    this.totalSold = this.totalSold + Math.floor(this.avgph * people);
-    this.cookiesSoldEachHour.push(Math.floor(this.avgph * people));
-  }
-};
-
 Branch.prototype.render = function() {
-  this.sellCookies(); //Need to get rid of this - Recalculating totals every time it renders
   var trEl = document.createElement('tr');
 
   var tdEl = document.createElement('td');
@@ -80,17 +79,13 @@ Branch.prototype.render = function() {
   cookies.appendChild(trEl)
 };
 
+
+
 function renderBody() {
   for (var i = 0; i < branches.length; i++) {
     branches[i].render();
   };
 };
-
-var pike = new Branch('1st and Pike', 23, 65, 6.3);
-var seaTac = new Branch('Seatac Airport', 3, 24, 1.2);
-var seaCen = new Branch('Seattle Center', 11, 38, 3.7);
-var capHill = new Branch('Capitol Hill', 20, 38, 2.3);
-var alki = new Branch('Alki', 2, 16, 4.6);
 
 function renderFooter() {
   var trEl = document.createElement('tr');
@@ -139,6 +134,7 @@ function handleNewBranch(event) {//Creates new branch
     return alert('One or more of your fields is missing a value.')
   }
   else {
+  newBranch.sellCookies();
   newBranch.render();
   event.target.name.value = null;
   event.target.min.value = null;
@@ -197,10 +193,6 @@ function prHeader() { //Creates employee header
   trEl.appendChild(thEl);
   peoples.appendChild(trEl)
 }
-
-// pike.empCalc();
-// prHeader();
-// pike.payroll();
 
 for (var i = 0; i < branches.length; i++) {//Iterate through calculations
   branches[i].empCalc();
